@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyfrowy Bastylion</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    padding: 20px;
+}
+
+.timeline {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+    gap: 20px;
+}
+
+.event {
+    min-width: 250px;
+    background: #222;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.event:hover {
+    transform: scale(1.05);
+    background: #333;
+}
+
+.event img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    transition: 0.3s;
+}
+
+.popup.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.close {
+    cursor: pointer;
+    color: red;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔥 Cyfrowy Bastylion – 1789</h1>
+
+<div class="timeline">
+
+<div class="event" onclick="showPopup(0)">
+<img src="stany.jpg" alt="">
+<h3>Stany Generalne (maj 1789)</h3>
+<p>Konflikt o sposób głosowania</p>
+<a href="https://pl.wikipedia.org/wiki/Stany_Generalne_1789" target="_blank">Źródło</a>
+</div>
+
+<div class="event" onclick="showPopup(1)">
+<img src="zgromadzenie.jpg" alt="">
+<h3>Zgromadzenie Narodowe</h3>
+<p>Stan trzeci przejmuje inicjatywę</p>
+<a href="https://pl.wikipedia.org/wiki/Zgromadzenie_Narodowe" target="_blank">Źródło</a>
+</div>
+
+<div class="event" onclick="showPopup(2)">
+<img src="przysiega.jpg" alt="">
+<h3>Przysięga w sali do gry</h3>
+<p>Determinacja reformatorów</p>
+<a href="https://pl.wikipedia.org/wiki/Przysi%C4%99ga_w_Sali_do_gry_w_pi%C5%82k%C4%99" target="_blank">Źródło</a>
+</div>
+
+<div class="event" onclick="showPopup(3)">
+<img src="wojsko.jpg" alt="">
+<h3>Wojska pod Paryżem</h3>
+<p>Działania króla wywołują panikę</p>
+<a href="https://pl.wikipedia.org/wiki/Ludwik_XVI" target="_blank">Źródło</a>
+</div>
+
+<div class="event" onclick="showPopup(4)">
+<img src="bastylia.jpg" alt="">
+<h3>Szturm na Bastylię</h3>
+<p>14 lipca 1789</p>
+<a href="https://pl.wikipedia.org/wiki/Zdobycie_Bastylii" target="_blank">Źródło</a>
+</div>
+
+</div>
+
+<div id="popup" class="popup">
+<span class="close" onclick="closePopup()">X</span>
+<p id="popupText"></p>
+</div>
+
+<script>
+const texts = [
+"Spór o głosowanie: każdy stan czy każdy poseł?",
+"Stan trzeci ogłasza się reprezentacją narodu.",
+"\"Nie rozejdziemy się, dopóki nie uchwalimy konstytucji!\"",
+"Król gromadzi wojska – rośnie napięcie w Paryżu.",
+"\"Do broni!\" – lud zdobywa Bastylię."
+];
+
+function showPopup(index) {
+    document.getElementById("popupText").innerText = texts[index];
+    document.getElementById("popup").classList.add("active");
+}
+
+function closePopup() {
+    document.getElementById("popup").classList.remove("active");
+}
+</script>
+
+</body>
+</html>
