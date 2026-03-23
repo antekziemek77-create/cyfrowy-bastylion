@@ -7,9 +7,9 @@
 
 <style>
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    background: #111;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #0a0a0a, #300000);
     color: white;
     text-align: center;
 }
@@ -18,30 +18,50 @@ h1 {
     padding: 20px;
 }
 
+#tensionBar {
+    width: 80%;
+    height: 20px;
+    background: #333;
+    margin: 10px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#tension {
+    height: 100%;
+    width: 0%;
+    background: red;
+    transition: 0.5s;
+}
+
 .timeline {
     display: flex;
     overflow-x: auto;
-    padding: 20px;
     gap: 20px;
+    padding: 20px;
 }
 
 .event {
-    min-width: 250px;
-    background: #222;
-    border-radius: 10px;
+    min-width: 260px;
+    background: #1a1a1a;
+    border-radius: 12px;
     padding: 15px;
+    transition: 0.3s;
     cursor: pointer;
-    transition: transform 0.3s;
 }
 
 .event:hover {
-    transform: scale(1.05);
-    background: #333;
+    transform: scale(1.08);
+    background: #400000;
 }
 
 .event img {
     width: 100%;
     border-radius: 8px;
+}
+
+a {
+    color: #ffcc00;
 }
 
 .popup {
@@ -51,8 +71,8 @@ h1 {
     transform: translate(-50%, -50%) scale(0);
     background: #222;
     padding: 20px;
-    border-radius: 10px;
-    width: 300px;
+    border-radius: 12px;
+    width: 320px;
     transition: 0.3s;
 }
 
@@ -61,51 +81,62 @@ h1 {
 }
 
 .close {
-    cursor: pointer;
     color: red;
+    cursor: pointer;
+    float: right;
+}
+
+footer {
+    margin: 30px;
+    font-size: 14px;
+    color: #aaa;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🔥 Cyfrowy Bastylion – 1789</h1>
+<h1>🔥 Cyfrowy Bastylion – Narastanie Rewolucji 1789</h1>
+
+<div id="tensionBar">
+<div id="tension"></div>
+</div>
 
 <div class="timeline">
 
 <div class="event" onclick="showPopup(0)">
-<img src="stany.jpg" alt="">
-<h3>Stany Generalne (maj 1789)</h3>
-<p>Konflikt o sposób głosowania</p>
-<a href="https://pl.wikipedia.org/wiki/Stany_Generalne_1789" target="_blank">Źródło</a>
+<img src="stany.jpg">
+<h3>Stany Generalne</h3>
+<p>Maj 1789</p>
+<a href="https://pl.wikipedia.org/wiki/Stany_Generalne_(1789)" target="_blank">📖 Czytaj więcej</a>
 </div>
 
 <div class="event" onclick="showPopup(1)">
-<img src="zgromadzenie.jpg" alt="">
+<img src="zgromadzenie.jpg">
 <h3>Zgromadzenie Narodowe</h3>
-<p>Stan trzeci przejmuje inicjatywę</p>
-<a href="https://pl.wikipedia.org/wiki/Zgromadzenie_Narodowe" target="_blank">Źródło</a>
+<p>Czerwiec 1789</p>
+<a href="https://pl.wikipedia.org/wiki/Konstytuanta_(1789%E2%80%931791)" target="_blank">📖 Czytaj więcej</a>
 </div>
 
 <div class="event" onclick="showPopup(2)">
-<img src="przysiega.jpg" alt="">
+<img src="przysiega.jpg">
 <h3>Przysięga w sali do gry</h3>
-<p>Determinacja reformatorów</p>
-<a href="https://pl.wikipedia.org/wiki/Przysi%C4%99ga_w_Sali_do_gry_w_pi%C5%82k%C4%99" target="_blank">Źródło</a>
+<p>20 czerwca 1789</p>
+<a href="https://pl.wikipedia.org/wiki/Przysi%C4%99ga_w_Sali_do_gry_w_pi%C5%82k%C4%99" target="_blank">📖 Czytaj więcej</a>
 </div>
 
 <div class="event" onclick="showPopup(3)">
-<img src="wojsko.jpg" alt="">
+<img src="wojsko.jpg">
 <h3>Wojska pod Paryżem</h3>
-<p>Działania króla wywołują panikę</p>
-<a href="https://pl.wikipedia.org/wiki/Ludwik_XVI" target="_blank">Źródło</a>
+<p>Lipiec 1789</p>
+<a href="https://pl.wikipedia.org/wiki/Ludwik_XVI" target="_blank">📖 Czytaj więcej</a>
 </div>
 
 <div class="event" onclick="showPopup(4)">
-<img src="bastylia.jpg" alt="">
+<img src="bastylia.jpg">
 <h3>Szturm na Bastylię</h3>
 <p>14 lipca 1789</p>
-<a href="https://pl.wikipedia.org/wiki/Zdobycie_Bastylii" target="_blank">Źródło</a>
+<a href="https://pl.wikipedia.org/wiki/Zdobycie_Bastylii" target="_blank">📖 Czytaj więcej</a>
 </div>
 
 </div>
@@ -115,18 +146,28 @@ h1 {
 <p id="popupText"></p>
 </div>
 
+<footer>
+Projekt: Wielka Rewolucja Francuska – interaktywna oś czasu
+</footer>
+
 <script>
 const texts = [
-"Spór o głosowanie: każdy stan czy każdy poseł?",
-"Stan trzeci ogłasza się reprezentacją narodu.",
+"Spór o głosowanie – czy każdy stan ma jeden głos, czy każdy poseł?",
+"Stan trzeci przejmuje inicjatywę i tworzy reprezentację narodu.",
 "\"Nie rozejdziemy się, dopóki nie uchwalimy konstytucji!\"",
-"Król gromadzi wojska – rośnie napięcie w Paryżu.",
-"\"Do broni!\" – lud zdobywa Bastylię."
+"Król Ludwik XVI gromadzi wojska – Paryż wpada w panikę.",
+"\"Do broni!\" – tłum zdobywa Bastylię. Rewolucja wybucha."
 ];
+
+let tension = 0;
 
 function showPopup(index) {
     document.getElementById("popupText").innerText = texts[index];
     document.getElementById("popup").classList.add("active");
+
+    tension += 20;
+    if (tension > 100) tension = 100;
+    document.getElementById("tension").style.width = tension + "%";
 }
 
 function closePopup() {
